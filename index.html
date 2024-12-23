@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Custom Search</title>
+    <script>
+        // 获取父页面传递的 'q' 参数
+        function param(a) {
+            var uri = window.location.search;
+            var re = new RegExp('' + a + '=([^&?]*)', 'ig');
+            return ((uri.match(re)) ? (uri.match(re)[0].substr(a.length + 1)) : '');
+        }
+
+        (function() {
+            var cxes = ['c19a28668c68b496f']; // 第二个 CSE ID
+            var cx = cxes[0];
+            
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+
+            var q = param('q'); // 获取 'q' 参数
+            var keyword = (q == '' ? param('keyword') : q);
+            document.title = keyword; // 设置页面标题
+        })();
+    </script>
+</head>
+<body>
+    <div class="gcse-searchresults-only"></div>
+</body>
+</html>
